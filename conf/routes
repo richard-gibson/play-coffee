@@ -20,3 +20,11 @@ GET     /calculator/divide/:i/:j    controllers.CalculatorController.divide(i:In
 
 GET     /api/todo/task/:task       controllers.TodoRestController.lookup(task:String)
 GET     /api/todo/read/:id         controllers.TodoRestController.fetchById(id:Int)
+
+GET     /api/outlets/location/:location     controllers.CoffeeRestController.listByLocation(location:String)
+GET     /api/outlets/postcode/:postcode     controllers.CoffeeRestController.listByPostcode(postcode:String)
+GET     /api/outlets                        controllers.CoffeeRestController.listAllOutlets
+
+GET     /api/business/:id               controllers.CoffeeRestController.listById(id:Int)
+GET     /api/business                   controllers.CoffeeRestController.listAllBusinesses
+
