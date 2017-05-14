@@ -82,7 +82,7 @@ flyway/flywayMigrate
 compile
 ```
 
-Exercise Coffee App REST API
+##Exercise: Coffee App REST API
 Use the following classes to expose HTTP Endpoints to enable users to query Coffee Apps data
 modules/api/src/main/scala/com/coffeeapp/repo/BusinessRepository.scala
 modules/api/src/main/scala/com/coffeeapp/repo/OutletRepository.scala
@@ -96,3 +96,20 @@ GET     /api/outlets/postcode/:postcode     List all outlets matching postcode
 GET     /api/business                   List all businesses with their related outlets
 GET     /api/business/:id               List a business with related outlets by a given ID
 ```
+
+
+# Session 3
+##Exercise: Admin panel
+Add actions to the CoffeeBusinessController that will enable admin users to view and delete businesses
+
+Routes to implement
+GET     /coffee-admin                   controllers.CoffeeBusinessController.listBusinesses
+GET     /business/delete/:id            controllers.CoffeeBusinessController.deleteBusinessById(id:Int)
+
+The coffee-admin route should only display info from the Coffee_business table
+Add a link beside each coffee business enabling the user to delete the business
+(note a business can only be deleted if it doesn't have any related Outlets)
+
+If you are feeling adventurous:
+Implement another route to list a business with all related outlets using the route below
+GET     /business/read/:id              controllers.CoffeeBusinessController.listBusinessById(id:Int)

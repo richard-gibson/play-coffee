@@ -28,3 +28,6 @@ GET     /api/outlets                        controllers.CoffeeRestController.lis
 GET     /api/business/:id               controllers.CoffeeRestController.listById(id:Int)
 GET     /api/business                   controllers.CoffeeRestController.listAllBusinesses
 
+GET     /todo                       controllers.TodoController.listTodos
+GET     /todo/delete/:id            controllers.TodoController.deleteTodoById(id:Int)
+

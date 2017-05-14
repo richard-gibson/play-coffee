@@ -1,0 +1,32 @@
+
+@import models.Todo
+@(todos: List[Todo] = List.empty)
+@layout(title = "todo list") {
+    <div class="jumbotron text-center">
+        <h1>Todo List</h1>
+    </div>
+    @if(todos.nonEmpty) {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>task</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @todos.sortBy(_.id).map { todo =>
+                <tr>
+                    <td>@todo.id</td>
+                    <td>@todo.task</td>
+                    <td><a href="@routes.TodoController.deleteTodoById(todo.id)">delete</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    } else {
+        <h2>No Tasks Exist</h2>
+    }
+
+
+}
