@@ -8,3 +8,12 @@ GET     /                           controllers.HomeController.index
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+GET     /hello                      controllers.HelloController.hello
+GET     /hello/:name                controllers.HelloController.helloName(name:String)
+GET     /hello/:n/times             controllers.HelloController.helloNtimes(n:Int)
+
+GET     /calculator/add/:i/:j       controllers.CalculatorController.add(i:Int, j:Int)
+GET     /calculator/subtract/:i/:j  controllers.CalculatorController.subtract(i:Int, j:Int)
+GET     /calculator/multiply/:i/:j  controllers.CalculatorController.multiply(i:Int, j:Int)
+GET     /calculator/divide/:i/:j    controllers.CalculatorController.divide(i:Int, j:Int)
