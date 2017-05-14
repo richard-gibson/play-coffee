@@ -11,8 +11,8 @@ import play.api.mvc.{Action, Controller, Result}
 /**
   * Created by richardgibson on 14/05/2017.
   */
-class TodoController
-  extends Controller {
+class TodoController @Inject()(val messagesApi: MessagesApi)
+  extends Controller with I18nSupport {
   val todoModel =
     new TodoModel(
       List(Todo(1, "take out rubbish"),
@@ -24,7 +24,7 @@ class TodoController
 
 
   def listTodos = Action{
-    Ok(views.html.todo.todos(todoModel.fetchAll) )
+    Ok(views.html.todo.todos(todoModel.fetchAll, todoForm) )
   }
 
 
@@ -34,4 +34,24 @@ class TodoController
 
   }
 
+  val todoForm: Form[Todo] =
+    Form(mapping(
+      "id"        -> number,
+      "task"     -> nonEmptyText
+    )(Todo.apply)(Todo.unapply))
+
+
+  def submitTodo = Action{ implicit request =>
+    val formErrorFn: (Form[Todo]) => Result = {
+      errorForm =>
+      BadRequest(views.html.todo.todos(todoModel.fetchAll, errorForm))
+    }
+    val formSuccessFn: Todo => Result = {
+      todo =>
+        todoModel.upsert(todo)
+        Redirect(routes.TodoController.listTodos)
+    }
+
+    todoForm.bindFromRequest.fold(formErrorFn, formSuccessFn)
+  }
 }

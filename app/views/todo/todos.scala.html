@@ -1,6 +1,6 @@
 
 @import models.Todo
-@(todos: List[Todo] = List.empty)
+@(todos: List[Todo] = List.empty, todoForm: Form[Todo])(implicit messages: Messages)
 @layout(title = "todo list") {
     <div class="jumbotron text-center">
         <h1>Todo List</h1>
@@ -28,5 +28,13 @@
         <h2>No Tasks Exist</h2>
     }
 
+    @helper.form(action = routes.TodoController.submitTodo) {
+        @helper.inputText(todoForm("task"), 'class -> "form-control")
+        @*find max id in list and increment for next id*@
+        <input type="hidden" name="id" value="@(
+                todos.foldLeft(0)((acc, e)  => math.max(acc, e.id)) + 1
+                )">
+        <button class="btn btn-primary" type="submit">Create task</button>
+    }
 
 }

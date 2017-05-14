@@ -82,7 +82,7 @@ flyway/flywayMigrate
 compile
 ```
 
-##Exercise: Coffee App REST API
+## Exercise: Coffee App REST API
 Use the following classes to expose HTTP Endpoints to enable users to query Coffee Apps data
 modules/api/src/main/scala/com/coffeeapp/repo/BusinessRepository.scala
 modules/api/src/main/scala/com/coffeeapp/repo/OutletRepository.scala
@@ -99,12 +99,14 @@ GET     /api/business/:id               List a business with related outlets by 
 
 
 # Session 3
-##Exercise: Admin panel
+## Exercise: Admin panel
 Add actions to the CoffeeBusinessController that will enable admin users to view and delete businesses
 
 Routes to implement
+```
 GET     /coffee-admin                   controllers.CoffeeBusinessController.listBusinesses
 GET     /business/delete/:id            controllers.CoffeeBusinessController.deleteBusinessById(id:Int)
+```
 
 The coffee-admin route should only display info from the Coffee_business table
 Add a link beside each coffee business enabling the user to delete the business
@@ -112,4 +114,32 @@ Add a link beside each coffee business enabling the user to delete the business
 
 If you are feeling adventurous:
 Implement another route to list a business with all related outlets using the route below
+```
 GET     /business/read/:id              controllers.CoffeeBusinessController.listBusinessById(id:Int)
+```
+
+# Session 4
+## Exercise: Editing data in Admin panel
+Complete ```controllers.CoffeeBusinessForm``` to enable admin users to create and edit Coffee businesses.
+The form produce a valid ```com.coffeeapp.repo.Business``` object to use with the model and return errors to user if invalid data is input.
+
+Routes to implement
+```
+GET     /business/create                controllers.CoffeeBusinessController.createBusiness
+GET     /business/update/:id            controllers.CoffeeBusinessController.editBusiness(id:Int)
+
+POST    /business/submit                controllers.CoffeeBusinessController.submitBusinessForm
+```
+
+More if you want!
+Complete ```controllers.CoffeeOutletForm``` to enable admin users to create and edit Coffee outlets.
+The form produce a valid ```com.coffeeapp.repo.Outlet``` object to use with the model and return errors to user if invalid data is input.
+
+Routes to implement
+```
+GET     /outlet/create/:businessId      controllers.CoffeeOutletController.createOutlet(businessId:Int)
+GET     /outlet/update/:id              controllers.CoffeeOutletController.editOutlet(id:Int)
+GET     /outlet/delete/:businessId/:id  controllers.CoffeeOutletController.deleteOutletById(id:Int, businessId:Int)
+
+POST    /outlet/submit                  controllers.CoffeeOutletController.submitOutletForm
+```

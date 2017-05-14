@@ -30,6 +30,7 @@ GET     /api/business                   controllers.CoffeeRestController.listAll
 
 GET     /todo                       controllers.TodoController.listTodos
 GET     /todo/delete/:id            controllers.TodoController.deleteTodoById(id:Int)
+POST    /todo/submit                controllers.TodoController.submitTodo
 
 GET     /coffee-admin                   controllers.CoffeeBusinessController.listBusinesses
 GET     /business/delete/:id            controllers.CoffeeBusinessController.deleteBusinessById(id:Int)

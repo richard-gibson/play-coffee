@@ -4,12 +4,15 @@ import javax.inject.Inject
 
 import com.coffeeapp.repo._
 import play.api.Logger
+import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 
 import scala.util.{Failure, Success, Try}
 
 
-class CoffeeBusinessController @Inject()(businessRepository: BusinessRepository) extends Controller{
+class CoffeeBusinessController @Inject()(businessRepository: BusinessRepository,
+                                         val messagesApi: MessagesApi)
+  extends Controller with I18nSupport {
 
   def listBusinesses = Action {
     implicit request =>
