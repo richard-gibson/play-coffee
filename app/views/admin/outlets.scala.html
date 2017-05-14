@@ -13,6 +13,8 @@
                         <th>address</th>
                         <th>town</th>
                         <th>postcode</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 @businessOutlets.map { outlet =>
@@ -21,6 +23,16 @@
                         <td>@outlet.address</td>
                         <td>@outlet.town</td>
                         <td>@outlet.postcode</td>
+                        <td>
+                        @outlet.id.map { outletId =>
+                            <a href="@routes.CoffeeOutletController.editOutlet(outletId)">update</a>
+                        }
+                        </td>
+                        <td>
+                        @outlet.id.map { outletId =>
+                            <a href="@routes.CoffeeOutletController.deleteOutletById(outletId, outlet.businessId)">delete</a>
+                        }
+                        </td>
                     </tr>
                 }
 
@@ -29,6 +41,10 @@
         case None => {
             <h2>No Outlets yet created for @business.name</h2>
         }
+    }
+    @business.id.map { businessId =>
+        <a href="@routes.CoffeeOutletController.createOutlet(businessId)" class="btn btn-primary" role="button">
+            Create Outlet</a>
     }
 
 

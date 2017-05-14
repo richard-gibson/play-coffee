@@ -1,0 +1,14 @@
+@import com.coffeeapp.repo.Business
+@(title: String, business: Form[Business])(implicit messages: Messages)
+
+@admin.admin(adminTitle = title) {
+    <h1>@title</h1>
+    @helper.form(action = routes.CoffeeBusinessController.submitBusinessForm) {
+
+        @helper.inputText(business("name"), 'class -> "form-control")
+        @helper.inputText(business("email"), 'class -> "form-control")
+        @helper.inputText(business("createdAt"), 'class -> "form-control")
+        <input type="hidden" name="id" value="@business("id").value">
+        <button class="btn btn-primary" type="submit">OK</button>
+    }
+}

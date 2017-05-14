@@ -35,3 +35,14 @@ POST    /todo/submit                controllers.TodoController.submitTodo
 GET     /coffee-admin                   controllers.CoffeeBusinessController.listBusinesses
 GET     /business/delete/:id            controllers.CoffeeBusinessController.deleteBusinessById(id:Int)
 GET     /business/read/:id              controllers.CoffeeBusinessController.listBusinessById(id:Int)
+
+GET     /business/create                controllers.CoffeeBusinessController.createBusiness
+GET     /business/update/:id            controllers.CoffeeBusinessController.editBusiness(id:Int)
+
+POST    /business/submit                controllers.CoffeeBusinessController.submitBusinessForm
+
+GET     /outlet/create/:businessId      controllers.CoffeeOutletController.createOutlet(businessId:Int)
+GET     /outlet/update/:id              controllers.CoffeeOutletController.editOutlet(id:Int)
+GET     /outlet/delete/:businessId/:id  controllers.CoffeeOutletController.deleteOutletById(id:Int, businessId:Int)
+
+POST    /outlet/submit                  controllers.CoffeeOutletController.submitOutletForm

@@ -11,6 +11,13 @@ object CoffeeBusinessForm {
   val timeInstant: Mapping[java.time.Instant] = of[java.time.Instant]
   val outlets: Mapping[Option[Seq[Outlet]]] = of[Option[Seq[Outlet]]]
 
-  val coffeeBusinessForm: Form[Business] = ???
+  val coffeeBusinessForm: Form[Business] =
+    Form(mapping(
+      "id"          -> optional(number),
+      "name"        -> nonEmptyText,
+      "email"       -> email,
+      "createdAt"   -> timeInstant,
+      "outlets"     -> default(outlets, None)
+    )(Business.apply)(Business.unapply))
 
 }

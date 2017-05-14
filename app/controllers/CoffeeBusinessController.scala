@@ -3,7 +3,9 @@ package controllers
 import javax.inject.Inject
 
 import com.coffeeapp.repo._
+import controllers.CoffeeBusinessForm.coffeeBusinessForm
 import play.api.Logger
+import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 
@@ -39,6 +41,43 @@ class CoffeeBusinessController @Inject()(businessRepository: BusinessRepository,
           Redirect(routes.CoffeeBusinessController.listBusinesses())
       }
 
+  }
+
+  def editBusiness(id:Int) = Action {
+    businessRepository.businessById(id).blocking match {
+      case Some(business) =>
+        Ok(views.html.admin.businessform("Update Business", coffeeBusinessForm fill business))
+      case None =>
+        Ok(views.html.admin.msg("Business not found"))
+    }
+  }
+
+  def createBusiness = Action {
+    Ok(views.html.admin.businessform("Create Business", coffeeBusinessForm))
+  }
+
+  def submitBusinessForm = Action { implicit request =>
+
+    val formErrorFn: (Form[Business]) => Result = {
+      errorForm =>
+        BadRequest(views.html.admin.businessform("Business Error", errorForm))
+    }
+
+
+    val formSuccessFn: Business => Result = {
+      business => {
+        //create or update business depending on whether business from form has an id assigned
+        business.id match {
+          case Some(_) =>
+            businessRepository.updateBusiness(business).blocking
+          case None =>
+            businessRepository.createBusiness(business).blocking
+        }
+        Redirect(routes.CoffeeBusinessController.listBusinesses())
+      }
+    }
+
+    coffeeBusinessForm.bindFromRequest().fold(formErrorFn, formSuccessFn)
   }
 
 }

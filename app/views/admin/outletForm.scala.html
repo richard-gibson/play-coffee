@@ -1,0 +1,15 @@
+@import com.coffeeapp.repo.Outlet
+@(title: String, outletForm: Form[Outlet], businessId: Int)(implicit messages: Messages)
+
+@admin.admin(adminTitle = s"$title for $businessId") {
+    <h1>@title</h1>
+    @helper.form(action = routes.CoffeeOutletController.submitOutletForm) {
+
+        @helper.inputText(outletForm("address"), 'class -> "form-control")
+        @helper.inputText(outletForm("town"), 'class -> "form-control")
+        @helper.inputText(outletForm("postcode"), 'class -> "form-control")
+        <input type="hidden" name="id" value="@outletForm("id").value">
+        <input type="hidden" name="businessId" value="@businessId">
+        <button class="btn btn-primary" type="submit">OK</button>
+    }
+}

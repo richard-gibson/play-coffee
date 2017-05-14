@@ -9,6 +9,8 @@
                     <th>Coffee Business</th>
                     <th>Email</th>
                     <th>Created</th>
+                    <th> </th>
+                    <th> </th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +20,8 @@
                            <td><a href="@routes.CoffeeBusinessController.listBusinessById(businessId)">@business.name</a></td>
                            <td>@business.email</td>
                            <td>@business.createdAt</td>
+                           <td><a href="@routes.CoffeeBusinessController.editBusiness(businessId)">update</a></td>
+                           <td><a href="@routes.CoffeeBusinessController.deleteBusinessById(businessId)">delete</a></td>
                        </tr>
                    }
             }
@@ -27,4 +31,5 @@
         <h2>No Businesses created</h2>
     }
 
+    <a href="@routes.CoffeeBusinessController.createBusiness()" class="btn btn-primary" role="button">New Business</a>
 }
