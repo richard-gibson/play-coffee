@@ -17,3 +17,6 @@ GET     /calculator/add/:i/:j       controllers.CalculatorController.add(i:Int, 
 GET     /calculator/subtract/:i/:j  controllers.CalculatorController.subtract(i:Int, j:Int)
 GET     /calculator/multiply/:i/:j  controllers.CalculatorController.multiply(i:Int, j:Int)
 GET     /calculator/divide/:i/:j    controllers.CalculatorController.divide(i:Int, j:Int)
+
+GET     /api/todo/task/:task       controllers.TodoRestController.lookup(task:String)
+GET     /api/todo/read/:id         controllers.TodoRestController.fetchById(id:Int)

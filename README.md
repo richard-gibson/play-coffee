@@ -1,5 +1,5 @@
 # play-coffee
-
+# Session 1
 ## SBT Installation instructions
 
 SBT is the "Scala Build Tool".
@@ -71,3 +71,28 @@ other useful sbt tasks
 | console    	| launch Scala REPL with access to application packages 	|
 | reload     	| reload sbt settings                                   	|
 | dist       	| package application                                   	|
+
+
+# Session 2
+## DB setup
+
+In sbt run
+```
+flyway/flywayMigrate
+compile
+```
+
+Exercise Coffee App REST API
+Use the following classes to expose HTTP Endpoints to enable users to query Coffee Apps data
+modules/api/src/main/scala/com/coffeeapp/repo/BusinessRepository.scala
+modules/api/src/main/scala/com/coffeeapp/repo/OutletRepository.scala
+
+Endpoints to expose
+```
+GET     /api/outlets                        List all outlets
+GET     /api/outlets/location/:location     List all outlets matching location (town)
+GET     /api/outlets/postcode/:postcode     List all outlets matching postcode
+
+GET     /api/business                   List all businesses with their related outlets
+GET     /api/business/:id               List a business with related outlets by a given ID
+```
