@@ -1,0 +1,30 @@
+@import com.coffeeapp.repo.Business
+@(businesses: Seq[Business] = List.empty)
+@admin.admin(adminTitle = "Business") {
+    @if(businesses.nonEmpty) {
+        <h2>Businesses</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Coffee Business</th>
+                    <th>Email</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+            @businesses.map { business =>
+                   @business.id.map { businessId =>
+                       <tr>
+                           <td><a href="@routes.CoffeeBusinessController.listBusinessById(businessId)">@business.name</a></td>
+                           <td>@business.email</td>
+                           <td>@business.createdAt</td>
+                       </tr>
+                   }
+            }
+            </tbody>
+        </table>
+    } else {
+        <h2>No Businesses created</h2>
+    }
+
+}

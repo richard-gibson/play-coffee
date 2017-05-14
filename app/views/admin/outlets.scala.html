@@ -1,0 +1,35 @@
+@import com.coffeeapp.repo.Business
+@(business: Business)
+@admin.admin(adminTitle = "Coffee Outlets") {
+
+    @business.outlets match {
+        case Some(businessOutlets) => {
+            <h2>@business.name info</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>address</th>
+                        <th>town</th>
+                        <th>postcode</th>
+                    </tr>
+                </thead>
+                @businessOutlets.map { outlet =>
+                    <tr>
+                        <td>@outlet.id</td>
+                        <td>@outlet.address</td>
+                        <td>@outlet.town</td>
+                        <td>@outlet.postcode</td>
+                    </tr>
+                }
+
+            </table>
+        }
+        case None => {
+            <h2>No Outlets yet created for @business.name</h2>
+        }
+    }
+
+
+}
